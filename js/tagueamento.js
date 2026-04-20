@@ -53,3 +53,35 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
     });
   });
 })();
+
+// view_form_success popup de confirmação
+(function () {
+  var lightbox = document.querySelector('.lightbox');
+  var form = document.querySelector('form.contato');
+  if (!lightbox || !form) return;
+
+  var observer = new MutationObserver(function () {
+    var visivel =
+      lightbox.classList.contains('active') ||
+      lightbox.classList.contains('open')   ||
+      lightbox.style.display === 'block'    ||
+      lightbox.style.visibility === 'visible';
+
+    if (visivel) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event:         'view_form_success',
+        page_location: window.location.href,
+        form_id:       form.getAttribute('id')   || '',
+        form_name:     form.getAttribute('name') || ''
+      });
+
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(lightbox, {
+    attributes: true,
+    attributeFilter: ['class', 'style']
+  });
+})();
