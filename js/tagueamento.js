@@ -56,18 +56,21 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
 
 // view_form_success popup de confirmação
 (function () {
-  var lightbox = document.querySelector('.lightbox');
   var form = document.querySelector('form.contato');
-  if (!lightbox || !form) return;
+  if (!form) return;
+
+  var body = document.body;
+  var jaDisparou = false;
 
   var observer = new MutationObserver(function () {
-    var visivel =
-      lightbox.classList.contains('active') ||
-      lightbox.classList.contains('open')   ||
-      lightbox.style.display === 'block'    ||
-      lightbox.style.visibility === 'visible';
+    if (jaDisparou) return;
 
-    if (visivel) {
+    if (body.classList.contains('lightbox-open')) {
+      var titulo = document.querySelector('.lightbox-title');
+      if (!titulo || titulo.textContent.trim() !== 'Contato enviado') return;
+
+      jaDisparou = true;
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event:         'view_form_success',
@@ -80,8 +83,8 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
     }
   });
 
-  observer.observe(lightbox, {
+  observer.observe(body, {
     attributes: true,
-    attributeFilter: ['class', 'style']
+    attributeFilter: ['class']
   });
 })();
