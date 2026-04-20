@@ -9,7 +9,6 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
     });
   });
 });
-// form_start — dispara ao focar o campo Nome pela primeira vez
 (function () {
   var campNome = document.querySelector('#nome');
   if (!campNome) return;
