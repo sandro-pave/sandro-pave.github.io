@@ -1,4 +1,6 @@
-// Clique nos cards 
+// ============================================
+// Clique nos cards de montadoras
+// ============================================
 document.querySelectorAll('.card-montadoras').forEach(function(card) {
   card.addEventListener('click', function() {
     window.dataLayer = window.dataLayer || [];
@@ -12,7 +14,9 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
 });
 
 
+// ============================================
 // form_start — primeiro campo preenchido
+// ============================================
 (function () {
   var campNome = document.querySelector('#nome');
   if (!campNome) return;
@@ -33,7 +37,10 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 })();
 
+
+// ============================================
 // form_submit — clique no botão Enviar
+// ============================================
 (function () {
   var form = document.querySelector('form.contato');
   if (!form) return;
@@ -54,10 +61,15 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 })();
 
-// view_form_success — popup de confirmação apareceu
 
+// ============================================
+// view_form_success — popup de confirmação apareceu
+// ============================================
 (function () {
-  var form = document.querySelector('form.contato');
+  var campNome = document.querySelector('#nome');
+  if (!campNome) return;
+
+  var form = campNome.closest('form');
   if (!form) return;
 
   form.addEventListener('submit', function () {
@@ -75,11 +87,10 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
           form_id:       form.getAttribute('id')   || '',
           form_name:     form.getAttribute('name') || ''
         });
-
-        clearInterval(intervalo); // Para de verificar
+        clearInterval(intervalo);
       }
 
-      if (tentativas >= 30) clearInterval(intervalo); 
+      if (tentativas >= 30) clearInterval(intervalo);
     }, 100);
   });
 })();
