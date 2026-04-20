@@ -54,37 +54,32 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 })();
 
-// view_form_success popup de confirmação
+// view_form_success — popup de confirmação apareceu
+
 (function () {
   var form = document.querySelector('form.contato');
   if (!form) return;
 
-  var body = document.body;
-  var jaDisparou = false;
+  form.addEventListener('submit', function () {
+    var tentativas = 0;
 
-  var observer = new MutationObserver(function () {
-    if (jaDisparou) return;
-
-    if (body.classList.contains('lightbox-open')) {
+    var intervalo = setInterval(function () {
+      tentativas++;
       var titulo = document.querySelector('.lightbox-title');
-      if (!titulo || titulo.textContent.trim() !== 'Contato enviado') return;
 
-      jaDisparou = true;
+      if (titulo && titulo.textContent.trim() === 'Contato enviado') {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event:         'view_form_success',
+          page_location: window.location.href,
+          form_id:       form.getAttribute('id')   || '',
+          form_name:     form.getAttribute('name') || ''
+        });
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event:         'view_form_success',
-        page_location: window.location.href,
-        form_id:       form.getAttribute('id')   || '',
-        form_name:     form.getAttribute('name') || ''
-      });
+        clearInterval(intervalo); // Para de verificar
+      }
 
-      observer.disconnect();
-    }
-  });
-
-  observer.observe(body, {
-    attributes: true,
-    attributeFilter: ['class']
+      if (tentativas >= 30) clearInterval(intervalo); 
+    }, 100);
   });
 })();
