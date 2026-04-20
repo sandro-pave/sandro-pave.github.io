@@ -19,8 +19,8 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
       event:            'form_start',
       page_location:    window.location.href,
       form_id:          'nome',
-      form_name:        'contato',           // <form> não tem atributo name
-      form_destination: 'https://sandro-pave.github.io/sobre.html#contato'            // <form> não tem atributo action
+      form_name:        'contato',          
+      form_destination: 'https://sandro-pave.github.io/sobre.html#contato'
     });
 
     campNome.removeEventListener('focus', disparaFormStart);
