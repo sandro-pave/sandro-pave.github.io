@@ -9,27 +9,21 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
     });
   });
 });
-(function() {
-  var formPreenchido = false;
+// form_start — dispara ao focar o campo Nome pela primeira vez
+(function () {
+  var campNome = document.querySelector('#nome');
+  if (!campNome) return;
 
-  var form = document.querySelector('form.contato');
-  if (!form) return;
-
-  var campos = form.querySelectorAll('input, textarea, select');
-
-  campos.forEach(function(campo) {
-    campo.addEventListener('focus', function() {
-      if (formPreenchido) return; 
-      formPreenchido = true;
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event:            'form_start',
-        page_location:    window.location.href,
-        form_id:          form.getAttribute('id')     || '',
-        form_name:        form.getAttribute('name')   || '',
-        form_destination: form.getAttribute('action') || ''
-      });
+  campNome.addEventListener('focus', function disparaFormStart() {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event:            'form_start',
+      page_location:    window.location.href,
+      form_id:          'nome',
+      form_name:        'contato',           // <form> não tem atributo name
+      form_destination: 'https://sandro-pave.github.io/sobre.html#contato'            // <form> não tem atributo action
     });
+
+    campNome.removeEventListener('focus', disparaFormStart);
   });
 })();
