@@ -1,6 +1,5 @@
-// ============================================
-// Clique nos cards de montadoras
-// ============================================
+// Clique nos cards
+
 document.querySelectorAll('.card-montadoras').forEach(function(card) {
   card.addEventListener('click', function() {
     window.dataLayer = window.dataLayer || [];
@@ -13,10 +12,9 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 });
 
-
-// ============================================
+// _________________________________________
 // form_start — primeiro campo preenchido
-// ============================================
+
 (function () {
   var campNome = document.querySelector('#nome');
   if (!campNome) return;
@@ -37,10 +35,9 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 })();
 
+// _______________________________________
+// form_submit — clique no botão Enviar (colocar Enviar no GTM - form_submit_text)
 
-// ============================================
-// form_submit — clique no botão Enviar
-// ============================================
 (function () {
   var form = document.querySelector('form.contato');
   if (!form) return;
@@ -61,10 +58,9 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
   });
 })();
 
-
-// ============================================
+// ___________________________________________________
 // view_form_success — popup de confirmação apareceu
-// ============================================
+
 (function () {
   var campNome = document.querySelector('#nome');
   if (!campNome) return;
@@ -94,3 +90,5 @@ document.querySelectorAll('.card-montadoras').forEach(function(card) {
     }, 100);
   });
 })();
+
+// verificar duplicidades no GTM - ok!
